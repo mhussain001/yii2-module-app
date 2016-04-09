@@ -7,6 +7,10 @@ use app\models\entities\Module;
 
 class UrlManager extends \yii\web\UrlManager
 {
+    public $rules=[
+        'GET /user/<id:\d+>'=>'/example-user/view',
+    ];
+
     /**
      * Register rules for module.
      *

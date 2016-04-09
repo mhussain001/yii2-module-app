@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\module2\modules\v1;
+namespace app\modules\example_tracker\modules\v1;
 
 use app\interlayers\VersionModule;
 
