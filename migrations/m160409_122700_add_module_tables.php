@@ -10,9 +10,10 @@ class m160409_122700_add_module_tables extends Migration
             'id' => $this->string()->notNull(),
             'name' => $this->string()->notNull(),
             'is_active' => $this->boolean()->notNull()->defaultValue(true),
-            'version_id' => $this->string()->notNull(),
+            'version_id' => $this->string(),
+            'source' => $this->string()->notNull(),
         ]);
-        $this->addPrimaryKey('module_id', 'module', 'id');
+        $this->addPrimaryKey('module_pk', 'module', 'id');
         $this->createIndex('module_is_active', 'module', 'is_active');
 
         $this->createTable('module_version', [
@@ -21,7 +22,7 @@ class m160409_122700_add_module_tables extends Migration
             'source' => $this->string()->notNull(),
             'module_id' => $this->string()->notNull(),
         ]);
-        $this->addPrimaryKey('module_version_id', 'module_version', 'id');
+        $this->addPrimaryKey('module_version_pk', 'module_version', ['id','module_id']);
 
         $this->addForeignKey('module_version_id__module_version_id', 'module', 'version_id', 'module_version', 'id');
         $this->addForeignKey('module_version_module_id__module_id', 'module_version', 'module_id', 'module', 'id');

@@ -11,12 +11,13 @@ use app\models\queries\ModuleVersionQuery;
  * @property string $name
  * @property bool $is_active
  * @property int $version_id
+ * @property string $source
  * @property ModuleVersion[] $versions
  * @property ModuleVersion|null $activeVersion
  */
 class Module extends ActiveRecord
 {
-    /** @inheritdoc */
+    /** @return ModuleQuery */
     public static function find()
     {
         return new ModuleQuery(static::class);
@@ -31,6 +32,9 @@ class Module extends ActiveRecord
     /** @return ModuleVersionQuery */
     public function getActiveVersion()
     {
-        return $this->hasOne(ModuleVersion::class, ['id' => 'version_id']);
+        return $this->hasOne(ModuleVersion::class, [
+            'id' => 'version_id',
+            'module_id' => 'id',
+        ]);
     }
 }
