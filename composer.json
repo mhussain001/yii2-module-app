@@ -1,0 +1,29 @@
+{
+    "name": "haruatari/yii2-module-app",
+    "description": "Empty module application on Yii2",
+    "minimum-stability": "dev",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Viktor Pikaev",
+            "email": "haruatari@gmail.com",
+            "homepage": "http://haru-atari.com/about"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "yiisoft/yii2": "2.0.7"
+    },
+    "require-dev": {
+        "yiisoft/yii2-codeception": "*",
+        "yiisoft/yii2-debug": "*",
+        "yiisoft/yii2-gii": "*",
+        "codeception/codeception": "2.0.*@dev",
+        "codeception/specify": "*",
+        "codeception/verify": "*",
+        "yiisoft/yii2-faker": "*"
+    },
+    "config": {
+        "process-timeout": 1800
+    }
+}
