@@ -2,7 +2,7 @@
 
 namespace app\components;
 
-use app\models\entities\Module;
+use app\models\entities\ModuleVersion;
 use yii\base\Event;
 
 class EventManager
@@ -53,28 +53,24 @@ class EventManager
     /**
      * Register handlers for module.
      *
-     * @param Module $module
+     * @param ModuleVersion $module
      */
     public function registerModuleHandlers($module)
     {
-        if ($module->activeVersion) {
-            $class = $module->activeVersion->source;
+            $class = $module->source;
             $handlers = $class::getEventHandlers();
             $this->registerHandlers($handlers);
-        }
     }
 
     /**
      * Unregister handlers for module.
      *
-     * @param Module $module
+     * @param ModuleVersion $module
      */
     public function unregisterModuleHandlers($module)
     {
-        if ($module->activeVersion) {
-            $class = $module->activeVersion->source;
+            $class = $module->source;
             $handlers = $class::getEventHandlers();
             $this->unregisterHandlers($handlers);
-        }
     }
 }

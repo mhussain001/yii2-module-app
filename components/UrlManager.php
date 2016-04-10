@@ -2,25 +2,22 @@
 
 namespace app\components;
 
-
-use app\models\entities\Module;
+use app\models\entities\ModuleVersion;
 
 class UrlManager extends \yii\web\UrlManager
 {
-    public $rules=[
-        'GET /user/<id:\d+>'=>'/example-user/view',
+    public $rules = [
+        'GET /user/<id:\d+>' => '/example-user/view',
     ];
 
     /**
      * Register rules for module.
      *
-     * @param Module $module
+     * @param ModuleVersion $module
      */
     public function registerModuleRules($module)
     {
-        if ($module->activeVersion) {
-            $class = $module->activeVersion->source;
-            $this->addRules($class::getUrlRules());
-        }
+        $class = $module->source;
+        $this->addRules($class::getUrlRules());
     }
 }

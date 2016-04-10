@@ -29,8 +29,8 @@ class WebApplication extends Application
                 continue;
             }
             $this->setModule($module->id, $module->activeVersion->source);
-            $this->urlManager->registerModuleRules($module);
-            $this->eventManager->registerModuleHandlers($module);
+            $this->urlManager->registerModuleRules($module->activeVersion);
+            $this->eventManager->registerModuleHandlers($module->activeVersion);
         }
     }
 
