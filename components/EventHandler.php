@@ -12,6 +12,5 @@ abstract class EventHandler
     public function invoiceCreateHandler($event)
     {
         echo 'Handler for example_billing.invoice.create in core has been firing.';
-
     }
 }

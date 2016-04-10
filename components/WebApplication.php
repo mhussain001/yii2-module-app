@@ -19,7 +19,7 @@ class WebApplication extends Application
     }
 
     /**
-     * Set common and version subModules for enables modules.
+     * Set modules.
      */
     protected function enableModules()
     {
@@ -34,6 +34,9 @@ class WebApplication extends Application
         }
     }
 
+    /**
+     * Registers core event handlers.
+     */
     protected function registerEventHandlers()
     {
         $this->eventManager->registerHandlers([
