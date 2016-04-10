@@ -2,7 +2,7 @@
 
 namespace app\modules\example_tracker;
 
-use app\interlayers\MainModule;
+use app\components\MainModule;
 
 class ExampleTracker extends MainModule
 {

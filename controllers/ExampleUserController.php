@@ -2,7 +2,7 @@
 
 namespace app\controllers;
 
-use app\interlayers\WebController;
+use app\components\WebController;
 
 class ExampleUserController extends WebController
 {

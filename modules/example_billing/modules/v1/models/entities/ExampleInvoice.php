@@ -2,7 +2,7 @@
 
 namespace app\modules\example_billing\modules\v1\models\entities;
 
-use app\interlayers\ModuleActiveRecord;
+use app\components\ModuleActiveRecord;
 use app\modules\example_billing\events\ExampleInvoiceEvent;
 use app\modules\example_billing\ExampleBilling;
 use app\modules\example_billing\modules\v1\models\queries\ExampleInvoiceQuery;

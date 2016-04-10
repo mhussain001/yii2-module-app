@@ -2,7 +2,7 @@
 
 namespace app\modules\example_billing;
 
-use app\interlayers\MainModule;
+use app\components\MainModule;
 
 class ExampleBilling extends MainModule
 {

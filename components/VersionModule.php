@@ -1,6 +1,6 @@
 <?php
 
-namespace app\interlayers;
+namespace app\components;
 
 abstract class VersionModule extends Module
 {

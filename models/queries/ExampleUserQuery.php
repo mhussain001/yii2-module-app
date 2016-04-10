@@ -2,7 +2,7 @@
 
 namespace app\models\queries;
 
-use app\interlayers\ActiveQuery;
+use app\components\ActiveQuery;
 
 class ExampleUserQuery extends ActiveQuery
 {

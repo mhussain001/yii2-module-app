@@ -3,7 +3,7 @@
 namespace app\modules\example_billing\modules\v1;
 
 use app\components\WebApplication;
-use app\interlayers\VersionModule;
+use app\components\VersionModule;
 use app\modules\example_billing\modules\v1\components\EventHandler;
 
 class V1 extends VersionModule

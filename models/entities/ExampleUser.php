@@ -4,7 +4,7 @@ namespace app\models\entities;
 
 use app\components\WebApplication;
 use app\events\ExampleUserEvent;
-use app\interlayers\ActiveRecord;
+use app\components\ActiveRecord;
 use app\models\queries\ExampleUserQuery;
 
 class ExampleUser extends ActiveRecord

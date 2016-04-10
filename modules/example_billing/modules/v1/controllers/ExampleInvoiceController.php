@@ -2,7 +2,7 @@
 
 namespace app\modules\example_billing\modules\v1\controllers;
 
-use app\interlayers\WebController;
+use app\components\WebController;
 
 class ExampleInvoiceController extends WebController
 {

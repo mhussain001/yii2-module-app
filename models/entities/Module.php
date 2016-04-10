@@ -2,7 +2,7 @@
 
 namespace app\models\entities;
 
-use app\interlayers\ActiveRecord;
+use app\components\ActiveRecord;
 use app\models\queries\ModuleQuery;
 use app\models\queries\ModuleVersionQuery;
 

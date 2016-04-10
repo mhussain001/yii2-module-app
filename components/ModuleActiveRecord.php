@@ -1,6 +1,6 @@
 <?php
 
-namespace app\interlayers;
+namespace app\components;
 
 use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
