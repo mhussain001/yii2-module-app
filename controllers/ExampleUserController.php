@@ -15,4 +15,9 @@ class ExampleUserController extends WebController
     {
         return "User view: id={$id}";
     }
+
+    public function actionTestMessage()
+    {
+        return \Yii::t('example-category', 'My mega message');
+    }
 }
