@@ -20,7 +20,7 @@ class ModuleQuery extends ActiveQuery
     public function active($isActive = true)
     {
         return $isActive
-            ? $this->andWhere('version is not null')
-            : $this->andWhere('version is null');
+            ? $this->andWhere('version_id is not null')
+            : $this->andWhere('version_id is null');
     }
 }
