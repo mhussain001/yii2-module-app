@@ -19,6 +19,8 @@ class ModuleQuery extends ActiveQuery
      */
     public function active($isActive = true)
     {
-        return $this->andWhere(['is_active' => $isActive]);
+        return $isActive
+            ? $this->andWhere('version is not null')
+            : $this->andWhere('version is null');
     }
 }

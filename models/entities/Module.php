@@ -9,7 +9,6 @@ use app\models\queries\ModuleVersionQuery;
 /**
  * @property int $id
  * @property string $name
- * @property bool $is_active
  * @property int $version_id
  * @property string $source
  * @property ModuleVersion[] $versions
