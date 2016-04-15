@@ -16,10 +16,31 @@ use app\models\queries\ModuleVersionQuery;
  */
 class Module extends ActiveRecord
 {
+    private static $activeVersionIds = [];
+
     /** @return ModuleQuery */
     public static function find()
     {
         return new ModuleQuery(static::class);
+    }
+
+    /**
+     * Return id of active version for module.
+     * @param string $moduleId
+     * @return string|null
+     */
+    public static function getActiveVersionIdByModuleId($moduleId)
+    {
+        if (!isset(static::$activeVersionIds[$moduleId])) {
+            $id = static::find()
+                ->select('version_id')
+                ->andWhere(['id' => $moduleId])
+                ->active()
+                ->scalar();
+
+            static::$activeVersionIds[$moduleId] = $id ?: null;
+        }
+        return static::$activeVersionIds[$moduleId];
     }
 
     /** @return ModuleVersionQuery */
