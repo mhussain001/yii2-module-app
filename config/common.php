@@ -12,7 +12,8 @@ return [
         'i18n' => [
             'translations' => [
                 '*' => [
-                    'class' => \yii\i18n\PhpMessageSource::class,
+                    'class' => \app\components\PhpMessageSource::class,
+                    'basePath' => '/messages',
                 ],
             ],
         ],

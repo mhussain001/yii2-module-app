@@ -3,10 +3,37 @@
 namespace app\components;
 
 use app\models\entities\Module as ModuleAr;
+use yii\base\Exception;
 use yii\helpers\Inflector;
 
 abstract class MainModule extends Module
 {
+    /**
+     * Translates a message to the specified language by module's dictionary.
+     *
+     * @param string $category
+     * @param string $message
+     * @param array $params = []
+     * @param string $language = null
+     * @param string $version = null
+     * @return string
+     * @throws Exception
+     * @see \Yii::t()
+     */
+    public static function t($category, $message, $params = [], $language = null, $version = null)
+    {
+        $class = static::class;
+        $id = Inflector::underscore(substr($class, strrpos($class, '\\') + 1));
+        if ($version === null) {
+            $version = ModuleAr::getActiveVersionIdByModuleId($id);
+        }
+        if ($version === null) {
+            throw new Exception("Invalid module id: {$id}");
+        }
+        $category = "{$id}.{$version}.{$category}";
+        return \Yii::t($category, $message, $params, $language);
+    }
+
     /**
      * Return an instance of $className from $version submodule.
      *
@@ -51,7 +78,7 @@ abstract class MainModule extends Module
             $moduleVersion = ModuleAr::getActiveVersionIdByModuleId($moduleId);
         }
         if ($moduleVersion === null) {
-           return null;
+            return null;
         }
 
         $namespace = substr($moduleClass, 0, strrpos($moduleClass, '\\'));
