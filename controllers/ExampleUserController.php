@@ -19,11 +19,20 @@ class ExampleUserController extends WebController
 
     public function actionTestMessage()
     {
-        return \Yii::t('example-category', 'My mega message');
+        \Yii::t('example-category', 'My mega message');
+
+        \Yii::t('example_billing.example-category', 'My mega message');
+
+        \Yii::t('example_billing.v1.example-category', 'My mega message');
+        ExampleBilling::t('example-category', 'My mega message');
+        ExampleBilling::t('example-category', 'My mega message', [], null, 'v1');
     }
 
-    public function actionTestModuleMessage()
+    public function actionTestFacades()
     {
-        return ExampleBilling::t('example-category', 'My mega message');
+        $object = ExampleBilling::getObject('models\entities\ExampleInvoice');
+        if ($object) {
+            print_r($object->attributes);
+        }
     }
 }

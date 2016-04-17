@@ -76,15 +76,12 @@ class MigrateController extends \yii\console\controllers\MigrateController
             $this->addMigrationHistory($class);
             $time = microtime(true) - $start;
             $this->stdout("*** applied $class (time: " . sprintf("%.3f", $time) . "s)\n\n", Console::FG_GREEN);
-
             return true;
         } else {
             $time = microtime(true) - $start;
             $this->stdout("*** failed to apply $class (time: " . sprintf("%.3f", $time) . "s)\n\n", Console::FG_RED);
-
             return false;
         }
-
     }
 
     /** @inheritdoc */
