@@ -1,5 +1,7 @@
 <?php
 
+namespace app\migrations;
+
 use yii\db\Migration;
 
 class m160409_124615_add_test_modules extends Migration

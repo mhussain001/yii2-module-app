@@ -22,7 +22,7 @@ abstract class ModuleActiveRecord extends ActiveRecord
      * @param string $className
      * @return string
      */
-    protected static function getTablePrefix($className)
+    public static function getTablePrefix($className)
     {
         list(, $idModule, $tail) = explode('\\modules\\', $className);
         if (!$idModule) {

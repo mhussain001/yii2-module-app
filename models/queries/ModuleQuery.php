@@ -23,4 +23,13 @@ class ModuleQuery extends ActiveQuery
             ? $this->andWhere('version_id is not null')
             : $this->andWhere('version_id is null');
     }
+
+    /**
+     * @param string|array $id
+     * @return $this
+     */
+    public function byId($id)
+    {
+        return $this->andWhere(['id' => $id]);
+    }
 }
