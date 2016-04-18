@@ -17,26 +17,12 @@ class MigrateController extends \yii\console\controllers\MigrateController
     /** @inheritdoc */
     public function actionCreate($name)
     {
-        $this->create($name, $this->namespace);
-    }
-
-    /**
-     * Creates new migration.
-     *
-     * @param string $name Name of migration (not className).
-     * @param string $namespace Namespace of migration class.
-     * @throws Exception
-     * @see MigrateController::actionCreate()
-     */
-    protected function create($name, $namespace)
-    {
         if (!preg_match('/^\w+$/', $name)) {
             throw new Exception("The migration name should contain letters, digits and/or underscore characters only.");
         }
-
         $className = 'm' . gmdate('ymd_His') . '_' . $name;
-        $fullClassName = "$namespace\\{$className}";
-
+        $namespace = $this->namespace;
+        $fullClassName = "{$namespace}\\{$className}";
         $file = $this->getFileOfClass($fullClassName);
         if ($this->confirm("Create new migration '$file'?")) {
             $content = $this->renderFile(\Yii::getAlias($this->templateFile), [
@@ -51,25 +37,12 @@ class MigrateController extends \yii\console\controllers\MigrateController
     /** @inheritdoc */
     protected function migrateUp($class)
     {
-        return $this->up($class, $this->namespace);
-    }
-
-    /**
-     * Migration up.
-     *
-     * @param string $class Name of migration class.
-     * @param string $namespace Namespace of migration class.
-     * @return bool
-     * @throws Exception
-     * @see MigrateController::migrateUp()
-     */
-    protected function up($class, $namespace)
-    {
         if ($class === self::BASE_MIGRATION) {
             return true;
         }
         $this->stdout("*** applying $class\n", Console::FG_YELLOW);
         $start = microtime(true);
+        $namespace = $this->namespace;
         $fullClass = "{$namespace}\\{$class}";
         $migration = $this->createMigration($fullClass);
         if ($migration->up() !== false) {
@@ -87,26 +60,13 @@ class MigrateController extends \yii\console\controllers\MigrateController
     /** @inheritdoc */
     protected function migrateDown($class)
     {
-        return $this->down($class, $this->namespace);
-    }
-
-    /**
-     * Migration down.
-     *
-     * @param string $class Name of migration class.
-     * @param string $namespace Namespace of migration class.
-     * @return bool
-     * @throws Exception
-     * @see MigrateController::migrateDown()
-     */
-    protected function down($class, $namespace)
-    {
         if ($class === self::BASE_MIGRATION) {
             return true;
         }
 
         $this->stdout("*** reverting $class\n", Console::FG_YELLOW);
         $start = microtime(true);
+        $namespace = $this->namespace;
         $fullClass = "{$namespace}\\{$class}";
         $migration = $this->createMigration($fullClass);
         if ($migration->down() !== false) {
