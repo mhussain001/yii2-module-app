@@ -2,14 +2,14 @@
 
 namespace app\models\queries;
 
-use app\components\ActiveQuery;
 use app\models\entities\Module;
+use yii\db\ActiveQuery;
+use yii\db\BatchQueryResult;
 
 /**
- * @method Module[] each($batchSize = 100, $db = null)
+ * @method Module[]|BatchQueryResult each($batchSize = 100, $db = null)
  * @method Module[] all($db = null)
  * @method Module one($db = null)
- * @method Module oneOrException($db = null, $exceptionMessage = null)
  */
 class ModuleQuery extends ActiveQuery
 {

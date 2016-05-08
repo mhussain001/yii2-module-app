@@ -6,7 +6,7 @@ use app\models\entities\Module as ModuleAr;
 use yii\base\Exception;
 use yii\helpers\Inflector;
 
-abstract class MainModule extends Module
+trait MainModuleTrait
 {
     /**
      * Translates a message to the specified language by module's dictionary.
@@ -85,4 +85,5 @@ abstract class MainModule extends Module
         $className = ltrim($name, "\\");
         return "\\{$namespace}\\modules\\{$moduleVersion}\\{$className}";
     }
+
 }

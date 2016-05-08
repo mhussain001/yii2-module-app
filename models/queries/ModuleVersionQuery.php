@@ -2,8 +2,15 @@
 
 namespace app\models\queries;
 
-use app\components\ActiveQuery;
+use app\models\entities\ModuleVersion;
+use yii\db\ActiveQuery;
+use yii\db\BatchQueryResult;
 
+/**
+ * @method ModuleVersion[]|BatchQueryResult each($batchSize = 100, $db = null)
+ * @method ModuleVersion[] all($db = null)
+ * @method ModuleVersion one($db = null)
+ */
 class ModuleVersionQuery extends ActiveQuery
 {
     /**

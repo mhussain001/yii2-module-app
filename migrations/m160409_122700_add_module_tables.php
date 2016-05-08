@@ -10,17 +10,17 @@ class m160409_122700_add_module_tables extends Migration
     {
         $this->createTable('module', [
             'id' => $this->string()->notNull(),
-            'name' => $this->string()->notNull(),
             'version_id' => $this->string(),
             'source' => $this->string()->notNull(),
+            'path'=>$this->string()->notNull(),
+            'depth'=>$this->integer()->notNull(),
         ]);
         $this->addPrimaryKey('module_pk', 'module', 'id');
 
         $this->createTable('module_version', [
             'id' => $this->string()->notNull(),
-            'name' => $this->string()->notNull(),
-            'source' => $this->string()->notNull(),
             'module_id' => $this->string()->notNull(),
+            'source' => $this->string()->notNull(),
         ]);
         $this->addPrimaryKey('module_version_pk', 'module_version', ['id','module_id']);
 

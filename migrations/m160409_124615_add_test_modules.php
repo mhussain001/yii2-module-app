@@ -2,23 +2,67 @@
 
 namespace app\migrations;
 
+use app\models\entities\Module;
+use app\models\entities\ModuleVersion;
 use yii\db\Migration;
 
 class m160409_124615_add_test_modules extends Migration
 {
     public function safeUp()
     {
-        $this->batchInsert('module', ['id', 'name','source'], [
-            ['example_billing', 'Биллинг', '\app\modules\example_billing\ExampleBilling'],
-            ['example_tracker', 'Трекер', '\app\modules\example_tracker\ExampleTracker'],
+        $mod1 = new Module([
+            'id' => 'mod1',
+            'source' => 'app\modules\mod1\Mod1',
         ]);
-        $this->batchInsert('module_version', ['id', 'module_id', 'name', 'source'], [
-            ['v1', 'example_billing', 'Версия 1', '\app\modules\example_billing\modules\v1\V1'],
-            ['v2', 'example_billing', 'Версия 2', '\app\modules\example_billing\modules\v2\V2'],
-            ['v1', 'example_tracker', 'Версия 1', '\app\modules\example_tracker\modules\v1\V1'],
-            ['v2', 'example_tracker', 'Версия 2', '\app\modules\example_tracker\modules\v2\V2'],
+        $mod1->makeRoot()->save();
+        (new ModuleVersion([
+            'id' => 'v1',
+            'source' => 'app\modules\mod1\modules\v1',
+            'module_id' => 'mod1',
+        ]))->save();
+        (new ModuleVersion([
+            'id' => 'v2',
+            'source' => 'app\modules\mod1\modules\v2',
+            'module_id' => 'mod1',
+        ]))->save();
+        $mod1->version_id = 'v1';
+        $mod1->save();
+
+        $mod2 = new Module([
+            'id' => 'mod2',
+            'source' => 'app\modules\mod1\modules\mod2\Mod2',
         ]);
-        $this->update('module',['version_id'=>'v1']);
+        $mod2->appendTo($mod1)->save();
+        (new ModuleVersion([
+            'id' => 'v1',
+            'source' => 'app\modules\mod1\modules\mod2\modules\v1',
+            'module_id' => 'mod2',
+        ]))->save();
+        (new ModuleVersion([
+            'id' => 'v2',
+            'source' => 'app\modules\mod1\modules\mod2\modules\v2',
+            'module_id' => 'mod2',
+        ]))->save();
+        $mod2->version_id = 'v1';
+        $mod2->save();
+
+        $mod3 = new Module([
+            'id' => 'mod3',
+            'source' => 'app\modules\mod1\modules\mod2\modules\Mod3',
+        ]);
+        $mod3->appendTo($mod2)->save();
+        (new ModuleVersion([
+            'id' => 'v1',
+            'source' => 'app\modules\mod1\modules\mod2\modules\mod2\modules\v1',
+            'module_id' => 'mod3',
+        ]))->save();
+        (new ModuleVersion([
+            'id' => 'v2',
+            'source' => 'app\modules\mod1\modules\mod2\modules\mod2\modules\v2',
+            'module_id' => 'mod3',
+        ]))->save();
+        $mod3->version_id = 'v1';
+        $mod3->save();
     }
 
     public function safeDown()

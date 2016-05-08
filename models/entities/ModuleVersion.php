@@ -2,8 +2,8 @@
 
 namespace app\models\entities;
 
-use app\components\ActiveRecord;
 use app\models\queries\ModuleVersionQuery;
+use yii\db\ActiveRecord;
 
 /**
  * @property int $id

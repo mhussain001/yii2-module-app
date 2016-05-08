@@ -2,17 +2,18 @@
 
 namespace app\models\entities;
 
-use app\components\ActiveRecord;
 use app\models\queries\ModuleQuery;
 use app\models\queries\ModuleVersionQuery;
+use paulzi\materializedPath\MaterializedPathBehavior;
+use yii\db\ActiveRecord;
 
 /**
  * @property int $id
- * @property string $name
  * @property int $version_id
  * @property string $source
  * @property ModuleVersion[] $versions
  * @property ModuleVersion|null $activeVersion
+ * @mixin MaterializedPathBehavior
  */
 class Module extends ActiveRecord
 {
@@ -26,6 +27,7 @@ class Module extends ActiveRecord
 
     /**
      * Return id of active version for module.
+     *
      * @param string $moduleId
      * @return string|null
      */
@@ -41,6 +43,18 @@ class Module extends ActiveRecord
             static::$activeVersionIds[$moduleId] = $id ?: null;
         }
         return static::$activeVersionIds[$moduleId];
+    }
+
+    /** @inheritdoc */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => MaterializedPathBehavior::class,
+                'sortable' => false,
+                'delimiter' => '.',
+            ],
+        ];
     }
 
     /** @return ModuleVersionQuery */

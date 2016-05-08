@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "30cbc73e983e8260eada7186763832a2",
+    "hash": "1e93e12c8cb324aa64883221dcb2a062",
     "packages": [
         {
             "name": "bower-asset/jquery",
@@ -248,6 +248,97 @@
                 "html"
             ],
             "time": "2013-11-30 08:25:19"
+        },
+        {
+            "name": "paulzi/yii2-materialized-path",
+            "version": "v2.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paulzi/yii2-materialized-path.git",
+                "reference": "03343ba24d532c30cf9eb1d83eaad357f4bc0191"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paulzi/yii2-materialized-path/zipball/03343ba24d532c30cf9eb1d83eaad357f4bc0191",
+                "reference": "03343ba24d532c30cf9eb1d83eaad357f4bc0191",
+                "shasum": ""
+            },
+            "require": {
+                "paulzi/yii2-sortable": "~1.0",
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "~2.0.0"
+            },
+            "require-dev": {
+                "phpunit/dbunit": "~1.0",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "paulzi\\materializedPath\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PaulZi",
+                    "email": "pavel.zimakoff@gmail.com"
+                }
+            ],
+            "description": "Materialized Path Behavior for Yii2",
+            "keywords": [
+                "materialized path",
+                "yii2"
+            ],
+            "time": "2016-04-25 13:57:43"
+        },
+        {
+            "name": "paulzi/yii2-sortable",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/paulzi/yii2-sortable.git",
+                "reference": "7d42496f009ef935e25e6146e34d7d588f62610f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/paulzi/yii2-sortable/zipball/7d42496f009ef935e25e6146e34d7d588f62610f",
+                "reference": "7d42496f009ef935e25e6146e34d7d588f62610f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0",
+                "yiisoft/yii2": "~2.0.0"
+            },
+            "require-dev": {
+                "phpunit/dbunit": "~1.0",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "paulzi\\sortable\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PaulZi",
+                    "email": "pavel.zimakoff@gmail.com"
+                }
+            ],
+            "description": "Sortable Behavior for Yii2",
+            "keywords": [
+                "sortable",
+                "yii2"
+            ],
+            "time": "2015-12-11 16:04:55"
         },
         {
             "name": "yiisoft/yii2",
