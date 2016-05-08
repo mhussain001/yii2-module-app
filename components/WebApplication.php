@@ -3,13 +3,10 @@
 namespace app\components;
 
 use app\models\entities\Module;
-use app\modules\example_billing\ExampleBilling;
 use yii\web\Application;
 
 class WebApplication extends Application
 {
-    const EVENT_EXAMPLE_USER_CREATE = 'core.exampleUser.create';
-
     /** @inheritdoc */
     public function init()
     {
@@ -39,11 +36,6 @@ class WebApplication extends Application
      */
     protected function registerEventHandlers()
     {
-        $this->eventManager->registerHandlers([
-            ExampleBilling::EVENT_EXAMPLE_INVOICE_CREATE => [
-                /** @see \app\components\EventHandler::invoiceCreateHandler() */
-                [EventHandler::class, 'invoiceCreateHandler'],
-            ],
-        ]);
+
     }
 }

@@ -2,6 +2,7 @@
 
 namespace app\components;
 
+use yii\db\ActiveRecord;
 use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
 

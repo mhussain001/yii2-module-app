@@ -6,9 +6,6 @@ return [
     'language' => 'ru-RU',
     'sourceLanguage' => 'en-US',
     'components' => [
-        'eventManager' => [
-            'class' => \app\components\EventManager::class,
-        ],
         'i18n' => [
             'translations' => [
                 '*' => [
