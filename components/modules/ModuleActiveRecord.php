@@ -1,12 +1,14 @@
 <?php
 
-namespace app\components;
+namespace app\components\modules;
 
-use yii\db\ActiveRecord;
 use yii\helpers\Inflector;
 use yii\helpers\StringHelper;
 
-abstract class ModuleActiveRecord extends ActiveRecord
+/**
+ * Trait for active records placed inside modules.
+ */
+trait ModuleActiveRecordTrait
 {
     /** @inheritdoc */
     public static function tableName()

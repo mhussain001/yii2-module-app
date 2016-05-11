@@ -2,7 +2,7 @@
 
 namespace app\commands;
 
-use app\components\ModuleActiveRecord;
+use app\components\modules\ModuleActiveRecordTrait;
 use app\models\entities\Module;
 use app\models\entities\ModuleVersion;
 use yii\console\Exception;
@@ -70,7 +70,7 @@ class ModuleMigrateController extends MigrateController
      */
     protected function getMigrationTable($version)
     {
-        $prefix = ModuleActiveRecord::getTablePrefix($version->source);
+        $prefix = ModuleActiveRecordTrait::getTablePrefix($version->source);
         return $prefix . $this->migrationTable;
     }
 

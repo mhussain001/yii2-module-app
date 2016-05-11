@@ -1,11 +1,14 @@
 <?php
 
-namespace app\components;
+namespace app\components\modules;
 
 use app\models\entities\Module as ModuleAr;
 use yii\base\Exception;
 use yii\helpers\Inflector;
 
+/**
+ * Trait for main modules.
+ */
 trait MainModuleTrait
 {
     /**

@@ -16,5 +16,8 @@ return [
         ],
         'db' => require(__DIR__ . '/db.php'),
     ],
+    'as initializer' => [
+        'class' => \app\components\ApplicationInitializerBehavior::class,
+    ],
     'params' => require(__DIR__ . '/params.php'),
 ];

@@ -53,12 +53,12 @@ class m160409_124615_add_test_modules extends Migration
         $mod3->appendTo($mod2)->save();
         (new ModuleVersion([
             'id' => 'v1',
-            'source' => 'app\modules\mod1\modules\mod2\modules\mod2\modules\v1',
+            'source' => 'app\modules\mod1\modules\mod2\modules\mod3\modules\v1',
             'module_id' => 'mod3',
         ]))->save();
         (new ModuleVersion([
             'id' => 'v2',
-            'source' => 'app\modules\mod1\modules\mod2\modules\mod2\modules\v2',
+            'source' => 'app\modules\mod1\modules\mod2\modules\mod3\modules\v2',
             'module_id' => 'mod3',
         ]))->save();
         $mod3->version_id = 'v1';

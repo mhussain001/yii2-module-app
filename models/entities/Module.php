@@ -52,7 +52,7 @@ class Module extends ActiveRecord
             [
                 'class' => MaterializedPathBehavior::class,
                 'sortable' => false,
-                'delimiter' => '.',
+                'delimiter' => '/',
             ],
         ];
     }

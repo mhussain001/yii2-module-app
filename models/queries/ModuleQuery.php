@@ -3,6 +3,7 @@
 namespace app\models\queries;
 
 use app\models\entities\Module;
+use paulzi\materializedPath\MaterializedPathQueryTrait;
 use yii\db\ActiveQuery;
 use yii\db\BatchQueryResult;
 
@@ -13,6 +14,8 @@ use yii\db\BatchQueryResult;
  */
 class ModuleQuery extends ActiveQuery
 {
+    use MaterializedPathQueryTrait;
+
     /**
      * @param bool $isActive = true
      * @return $this
