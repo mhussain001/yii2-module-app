@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\mod1\modules\mod2\modules\v2;
+namespace app\modules\personnel\modules\v2;
 
 use yii\base\Module;
 

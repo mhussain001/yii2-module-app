@@ -1,11 +1,11 @@
 <?php
 
-namespace app\modules\mod1\modules\mod2\modules\mod3;
+namespace app\modules\personnel\modules\training;
 
 use app\components\modules\MainModuleTrait;
 use yii\base\Module;
 
-class Mod3 extends Module
+class Training extends Module
 {
     use MainModuleTrait;
 }

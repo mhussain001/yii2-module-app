@@ -10,59 +10,80 @@ class m160409_124615_add_test_modules extends Migration
 {
     public function safeUp()
     {
-        $mod1 = new Module([
-            'id' => 'mod1',
-            'source' => 'app\modules\mod1\Mod1',
+        $personnel = new Module([
+            'id' => 'personnel',
+            'source' => 'app\modules\personnel\Personnel',
         ]);
-        $mod1->makeRoot()->save();
+        $personnel->makeRoot()->save();
         (new ModuleVersion([
             'id' => 'v1',
-            'source' => 'app\modules\mod1\modules\v1',
-            'module_id' => 'mod1',
+            'source' => 'app\modules\personnel\modules\v1',
+            'module_id' => 'personnel',
         ]))->save();
         (new ModuleVersion([
             'id' => 'v2',
-            'source' => 'app\modules\mod1\modules\v2',
-            'module_id' => 'mod1',
+            'source' => 'app\modules\personnel\modules\v2',
+            'module_id' => 'personnel',
         ]))->save();
-        $mod1->version_id = 'v1';
-        $mod1->save();
+        $personnel->version_id = 'v1';
+        $personnel->save();
 
-        $mod2 = new Module([
-            'id' => 'mod2',
-            'source' => 'app\modules\mod1\modules\mod2\Mod2',
-        ]);
-        $mod2->appendTo($mod1)->save();
-        (new ModuleVersion([
-            'id' => 'v1',
-            'source' => 'app\modules\mod1\modules\mod2\modules\v1',
-            'module_id' => 'mod2',
-        ]))->save();
-        (new ModuleVersion([
-            'id' => 'v2',
-            'source' => 'app\modules\mod1\modules\mod2\modules\v2',
-            'module_id' => 'mod2',
-        ]))->save();
-        $mod2->version_id = 'v1';
-        $mod2->save();
 
-        $mod3 = new Module([
-            'id' => 'mod3',
-            'source' => 'app\modules\mod1\modules\mod2\modules\Mod3',
+        $training = new Module([
+            'id' => 'training',
+            'source' => 'app\modules\personnel\modules\training\Training',
         ]);
-        $mod3->appendTo($mod2)->save();
+        $training->appendTo($personnel)->save();
         (new ModuleVersion([
             'id' => 'v1',
-            'source' => 'app\modules\mod1\modules\mod2\modules\mod3\modules\v1',
-            'module_id' => 'mod3',
+            'source' => 'app\modules\personnel\modules\training\modules\v1',
+            'module_id' => 'training',
         ]))->save();
         (new ModuleVersion([
             'id' => 'v2',
-            'source' => 'app\modules\mod1\modules\mod2\modules\mod3\modules\v2',
-            'module_id' => 'mod3',
+            'source' => 'app\modules\personnel\modules\training\modules\v2',
+            'module_id' => 'training',
         ]))->save();
-        $mod3->version_id = 'v1';
-        $mod3->save();
+        $training->version_id = 'v1';
+        $training->save();
+
+
+        $interview = new Module([
+            'id' => 'interview',
+            'source' => 'app\modules\personnel\modules\interview\Interview',
+        ]);
+        $interview->appendTo($personnel)->save();
+        (new ModuleVersion([
+            'id' => 'v1',
+            'source' => 'app\modules\personnel\modules\interview\modules\v1',
+            'module_id' => 'interview',
+        ]))->save();
+        (new ModuleVersion([
+            'id' => 'v2',
+            'source' => 'app\modules\personnel\modules\interview\modules\v2',
+            'module_id' => 'interview',
+        ]))->save();
+        $interview->version_id = 'v1';
+        $interview->save();
+
+
+        $archive = new Module([
+            'id' => 'archive',
+            'source' => 'app\modules\personnel\modules\interview\modules\archive\Archive',
+        ]);
+        $archive->appendTo($interview)->save();
+        (new ModuleVersion([
+            'id' => 'v1',
+            'source' => 'app\modules\personnel\modules\interview\modules\archive\modules\v1',
+            'module_id' => 'archive',
+        ]))->save();
+        (new ModuleVersion([
+            'id' => 'v2',
+            'source' => 'app\modules\personnel\modules\interview\modules\archive\modules\v2',
+            'module_id' => 'archive',
+        ]))->save();
+        $archive->version_id = 'v1';
+        $archive->save();
     }
 
     public function safeDown()

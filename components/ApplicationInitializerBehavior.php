@@ -25,7 +25,6 @@ class ApplicationInitializerBehavior extends Behavior
 
     public function beforeRequest()
     {
-        echo '<pre>';
         $modules = Module::find()->roots()->all();
         $modulesConfig = $this->enableModules($modules);
         $this->owner->setModules($modulesConfig);
