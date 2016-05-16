@@ -56,10 +56,10 @@ class ApplicationInitializerBehavior extends Behavior
      */
     private function enableModule($class)
     {
-        if ($class instanceof HasEventHandlers) {
+        if (is_subclass_of($class , HasEventHandlers::class)) {
             $class::setEventHandlers();
         }
-        if ($class instanceof HasUrlRules) {
+        if (is_subclass_of($class , HasUrlRules::class)) {
             $this->owner->urlManager->addRules($class::getUrlRules());
         }
     }

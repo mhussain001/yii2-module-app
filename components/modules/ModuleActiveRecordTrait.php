@@ -27,11 +27,10 @@ trait ModuleActiveRecordTrait
      */
     public static function getTablePrefix($className)
     {
-        list(, $idModule, $tail) = explode('\\modules\\', $className);
-        if (!$idModule) {
-            return '';
-        }
-        $idVersion = explode('\\', $tail)[0];
-        return $idModule . '_' . $idVersion . '_';
+        $moduleIds = explode('\\modules\\', $className);
+        unset($moduleIds[0]);
+        $lastId =& $moduleIds[count($moduleIds)];
+        $lastId = substr($lastId, 0, strpos($lastId, '\\'));
+        return implode('_', $moduleIds) . '_';
     }
 }
