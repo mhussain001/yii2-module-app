@@ -3,6 +3,7 @@
 namespace app\components\modules;
 
 use app\models\entities\Module as ModuleAr;
+use yii\base\Event;
 use yii\base\Exception;
 use yii\helpers\Inflector;
 
@@ -88,5 +89,4 @@ trait MainModuleTrait
         $className = ltrim($name, "\\");
         return "\\{$namespace}\\modules\\{$moduleVersion}\\{$className}";
     }
-
 }
