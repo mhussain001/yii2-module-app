@@ -43,38 +43,45 @@ trait MainModuleTrait
      *
      * @param string $className Name of class relatively of module's root.
      * @param array $constructorArgs = [] Arguments for constructor.
-     * @param string $moduleVersion = null Id of module's version. If null, active version will br used.
-     * @return mixed|null An instance of class or null
+     * @param string $moduleVersion = null Id of module's version. If null, active version will be used.
+     * @return mixed|null An instance of class or null if module has not active version or class does not exist.
      * @throws \yii\base\Exception
      */
     public static function getObject($className, array $constructorArgs = [], $moduleVersion = null)
     {
-        $class = static::createFullClassName($className, $moduleVersion);
-        return $class && class_exists($class) ? new $class(...$constructorArgs) : null;
+        $class = static::getClass($className, $moduleVersion);
+        return $class === null ? null : new $class(...$constructorArgs);
     }
 
     /**
      * Return full name of $className from $version submodule.
      *
      * @param string $className Name of class relatively of module's root.
-     * @param string $moduleVersion = null Id of module's version. If null, active version will br used.
-     * @return mixed|null A class or null
+     * @param string $moduleVersion = null Id of module's version. If null, active version will be used.
+     * @return mixed Class name or null if module has not active version or class does not exist.
      * @throws \yii\base\Exception
      */
     public static function getClass($className, $moduleVersion = null)
     {
-        $class = static::createFullClassName($className, $moduleVersion);
+        $class = static::createVersionClassName($className, $moduleVersion);
+        if ($class && class_exists($class)) {
+            return $class;
+        }
+        if ($moduleVersion !== null) {
+            return null;
+        }
+        $class = static::createRootClassName($className);
         return $class && class_exists($class) ? $class : null;
     }
 
     /**
-     * Creates full name of class bu his relative name and version of module.
+     * Creates full name of class by his relative name and version of module.
      *
      * @param string $name Name of class relatively of module's root.
      * @param string $moduleVersion = null Id of module's version. If null, active version will br used.
-     * @return string|null Full name of class. Null if module has not active version.
+     * @return string|null Full name of class. Null if module has not active version or class does not exist.
      */
-    private static function createFullClassName($name, $moduleVersion = null)
+    private static function createVersionClassName($name, $moduleVersion = null)
     {
         $moduleClass = static::class;
         $moduleId = Inflector::underscore(substr($moduleClass, strrpos($moduleClass, '\\') + 1));
@@ -88,5 +95,19 @@ trait MainModuleTrait
         $namespace = substr($moduleClass, 0, strrpos($moduleClass, '\\'));
         $className = ltrim($name, "\\");
         return "\\{$namespace}\\modules\\{$moduleVersion}\\{$className}";
+    }
+
+    /**
+     * Creates full name of class by his relative name in root of module.
+     *
+     * @param string $name Name of class relatively of module's root.
+     * @return string|null Full name of class. Null class does not exist.
+     */
+    private static function createRootClassName($name)
+    {
+        $moduleClass = static::class;
+        $namespace = substr($moduleClass, 0, strrpos($moduleClass, '\\'));
+        $className = ltrim($name, "\\");
+        return "\\{$namespace}\\{$className}";
     }
 }
