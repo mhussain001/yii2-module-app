@@ -10,80 +10,61 @@ class m160409_124615_add_test_modules extends Migration
 {
     public function safeUp()
     {
-        $personnel = new Module([
-            'id' => 'personnel',
-            'source' => 'app\modules\personnel\Personnel',
+        $modA = new Module([
+            'id' => 'mod_a',
+            'source' => 'app\modules\mod_a\ModA',
         ]);
-        $personnel->makeRoot()->save();
+        $modA->makeRoot()->save();
         (new ModuleVersion([
             'id' => 'v1',
-            'source' => 'app\modules\personnel\modules\v1\V1',
-            'module_id' => 'personnel',
+            'source' => 'app\modules\mod_a\modules\v1\V1',
+            'module_id' => 'mod_a',
         ]))->save();
         (new ModuleVersion([
             'id' => 'v2',
-            'source' => 'app\modules\personnel\modules\v2\V2',
-            'module_id' => 'personnel',
+            'source' => 'app\modules\mod_a\modules\v2\V2',
+            'module_id' => 'mod_a',
         ]))->save();
-        $personnel->version_id = 'v1';
-        $personnel->save();
+        $modA->version_id = 'v1';
+        $modA->save();
 
 
-        $training = new Module([
-            'id' => 'training',
-            'source' => 'app\modules\personnel\modules\training\Training',
+        $modB = new Module([
+            'id' => 'mod_b',
+            'source' => 'app\modules\mod_a\modules\mod_b\modB',
         ]);
-        $training->appendTo($personnel)->save();
+        $modB->appendTo($modA)->save();
         (new ModuleVersion([
             'id' => 'v1',
-            'source' => 'app\modules\personnel\modules\training\modules\v1\V1',
-            'module_id' => 'training',
+            'source' => 'app\modules\mod_a\modules\mod_b\modules\v1\V1',
+            'module_id' => 'mod_b',
         ]))->save();
         (new ModuleVersion([
             'id' => 'v2',
-            'source' => 'app\modules\personnel\modules\training\modules\v2\V2',
-            'module_id' => 'training',
+            'source' => 'app\modules\mod_a\modules\mod_b\modules\v2\V2',
+            'module_id' => 'mod_b',
         ]))->save();
-        $training->version_id = 'v1';
-        $training->save();
+        $modB->version_id = 'v1';
+        $modB->save();
 
 
-        $interview = new Module([
-            'id' => 'interview',
-            'source' => 'app\modules\personnel\modules\interview\Interview',
+        $modC = new Module([
+            'id' => 'mod_c',
+            'source' => 'app\modules\mod_a\modules\mod_b\modules\mod_c\modC',
         ]);
-        $interview->appendTo($personnel)->save();
+        $modC->appendTo($modB)->save();
         (new ModuleVersion([
             'id' => 'v1',
-            'source' => 'app\modules\personnel\modules\interview\modules\v1\V1',
-            'module_id' => 'interview',
+            'source' => 'app\modules\mod_a\modules\mod_b\modules\mod_c\modules\v1\V1',
+            'module_id' => 'mod_c',
         ]))->save();
         (new ModuleVersion([
             'id' => 'v2',
-            'source' => 'app\modules\personnel\modules\interview\modules\v2\V2',
-            'module_id' => 'interview',
+            'source' => 'app\modules\mod_a\modules\mod_b\modules\mod_c\modules\v2\V2',
+            'module_id' => 'mod_c',
         ]))->save();
-        $interview->version_id = 'v1';
-        $interview->save();
-
-
-        $archive = new Module([
-            'id' => 'archive',
-            'source' => 'app\modules\personnel\modules\interview\modules\archive\Archive',
-        ]);
-        $archive->appendTo($interview)->save();
-        (new ModuleVersion([
-            'id' => 'v1',
-            'source' => 'app\modules\personnel\modules\interview\modules\archive\modules\v1\V1',
-            'module_id' => 'archive',
-        ]))->save();
-        (new ModuleVersion([
-            'id' => 'v2',
-            'source' => 'app\modules\personnel\modules\interview\modules\archive\modules\v2\V2',
-            'module_id' => 'archive',
-        ]))->save();
-        $archive->version_id = 'v1';
-        $archive->save();
+        $modC->version_id = 'v1';
+        $modC->save();
     }
 
     public function safeDown()
