@@ -21,4 +21,22 @@ class ModuleVersionQuery extends ActiveQuery
     {
         return $this->andWhere(['id' => $id]);
     }
+
+    /**
+     * @param bool $isActive = true
+     * @return $this
+     */
+    public function active($isActive = true)
+    {
+        return $this->andWhere(['is_active' => $isActive]);
+    }
+
+    /**
+     * @param string $moduleId
+     * @return $this
+     */
+    public function byModuleId($moduleId)
+    {
+        return $this->andWhere(['module_id' => $moduleId]);
+    }
 }

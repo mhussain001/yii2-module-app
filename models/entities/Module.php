@@ -9,7 +9,6 @@ use yii\db\ActiveRecord;
 
 /**
  * @property int $id
- * @property int $version_id
  * @property string $source
  * @property ModuleVersion[] $versions
  * @property ModuleVersion|null $activeVersion
@@ -34,9 +33,9 @@ class Module extends ActiveRecord
     public static function getActiveVersionIdByModuleId($moduleId)
     {
         if (!isset(static::$activeVersionIds[$moduleId])) {
-            $id = static::find()
-                ->select('version_id')
-                ->andWhere(['id' => $moduleId])
+            $id = ModuleVersion::find()
+                ->select('id')
+                ->byModuleId($moduleId)
                 ->active()
                 ->scalar();
 
@@ -66,9 +65,8 @@ class Module extends ActiveRecord
     /** @return ModuleVersionQuery */
     public function getActiveVersion()
     {
-        return $this->hasOne(ModuleVersion::class, [
-            'id' => 'version_id',
-            'module_id' => 'id',
-        ]);
+        return $this
+            ->hasOne(ModuleVersion::class, ['module_id' => 'id',])
+            ->andWhere([ModuleVersion::tableName() . '.is_active' => true]);
     }
 }

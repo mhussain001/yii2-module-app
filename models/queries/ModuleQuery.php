@@ -17,17 +17,6 @@ class ModuleQuery extends ActiveQuery
     use MaterializedPathQueryTrait;
 
     /**
-     * @param bool $isActive = true
-     * @return $this
-     */
-    public function active($isActive = true)
-    {
-        return $isActive
-            ? $this->andWhere('version_id is not null')
-            : $this->andWhere('version_id is null');
-    }
-
-    /**
      * @param string|array $id
      * @return $this
      */

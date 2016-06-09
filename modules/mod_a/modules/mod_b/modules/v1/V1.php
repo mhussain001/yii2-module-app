@@ -2,16 +2,9 @@
 
 namespace app\modules\mod_a\modules\mod_b\modules\v1;
 
-use app\components\modules\HasUrlRulesInterface;
-use yii\base\Module;
+use app\components\modules\VersionModule;
 
-class V1 extends Module implements HasUrlRulesInterface
+class V1 extends VersionModule
 {
-    /** @inheritdoc */
-    public static function getUrlRules()
-    {
-        return [
 
-        ];
-    }
 }

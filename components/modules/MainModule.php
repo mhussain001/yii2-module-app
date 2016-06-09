@@ -4,12 +4,13 @@ namespace app\components\modules;
 
 use app\models\entities\Module as ModuleAr;
 use yii\base\Exception;
+use yii\base\Module;
 use yii\helpers\Inflector;
 
 /**
  * Trait for main modules.
  */
-trait MainModuleTrait
+abstract class MainModule extends Module
 {
     /**
      * Translates a message to the specified language by module's dictionary.

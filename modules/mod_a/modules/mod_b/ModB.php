@@ -2,10 +2,9 @@
 
 namespace app\modules\mod_a\modules\mod_b;
 
-use app\components\modules\MainModuleTrait;
-use yii\base\Module;
+use app\components\modules\MainModule;
 
-class ModB extends Module
+class ModB extends MainModule
 {
-    use MainModuleTrait;
+
 }
