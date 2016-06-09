@@ -2,8 +2,8 @@
 
 namespace app\components;
 
-use app\components\modules\HasEventHandlers;
-use app\components\modules\HasUrlRules;
+use app\components\modules\HasEventHandlersInterface;
+use app\components\modules\HasUrlRulesInterface;
 use app\models\entities\Module;
 use yii\base\Application;
 use yii\base\Behavior;
@@ -56,10 +56,10 @@ class ApplicationInitializerBehavior extends Behavior
      */
     private function enableModule($class)
     {
-        if (is_subclass_of($class , HasEventHandlers::class)) {
+        if (is_subclass_of($class , HasEventHandlersInterface::class)) {
             $class::setEventHandlers();
         }
-        if (is_subclass_of($class , HasUrlRules::class)) {
+        if (is_subclass_of($class , HasUrlRulesInterface::class)) {
             $this->owner->urlManager->addRules($class::getUrlRules());
         }
     }

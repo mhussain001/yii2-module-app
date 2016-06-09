@@ -5,7 +5,7 @@ namespace app\components\modules;
 /**
  * Interface for modules who have event handlers.
  */
-interface HasEventHandlers
+interface HasEventHandlersInterface
 {
     /**
      * Set event handlers.

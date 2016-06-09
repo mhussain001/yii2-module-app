@@ -2,11 +2,15 @@
 
 namespace app\modules\personnel\modules\interview\modules\v1\models;
 
+use app\components\modules\ModuleActiveRecordTrait;
 use app\modules\personnel\modules\interview\events\InterviewEvent;
 use app\modules\personnel\modules\interview\Interview as InterviewModule;
+use yii\db\ActiveRecord;
 
-class Interview extends \app\modules\personnel\modules\interview\models\Interview
+class Interview extends ActiveRecord
 {
+    use ModuleActiveRecordTrait;
+
     public function printTestMessage()
     {
         echo 'Interview from module "personnel.interview(v1)"';

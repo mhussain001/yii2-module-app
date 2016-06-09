@@ -5,7 +5,7 @@ namespace app\components\modules;
 /**
  * Interface for modules who have url rules.
  */
-interface HasUrlRules
+interface HasUrlRulesInterface
 {
     /**
      * @return array|\yii\web\UrlRuleInterface[] List of url rules.

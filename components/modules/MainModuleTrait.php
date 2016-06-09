@@ -3,7 +3,6 @@
 namespace app\components\modules;
 
 use app\models\entities\Module as ModuleAr;
-use yii\base\Event;
 use yii\base\Exception;
 use yii\helpers\Inflector;
 
@@ -64,13 +63,6 @@ trait MainModuleTrait
     public static function getClass($className, $moduleVersion = null)
     {
         $class = static::createVersionClassName($className, $moduleVersion);
-        if ($class && class_exists($class)) {
-            return $class;
-        }
-        if ($moduleVersion !== null) {
-            return null;
-        }
-        $class = static::createRootClassName($className);
         return $class && class_exists($class) ? $class : null;
     }
 
@@ -95,19 +87,5 @@ trait MainModuleTrait
         $namespace = substr($moduleClass, 0, strrpos($moduleClass, '\\'));
         $className = ltrim($name, "\\");
         return "\\{$namespace}\\modules\\{$moduleVersion}\\{$className}";
-    }
-
-    /**
-     * Creates full name of class by his relative name in root of module.
-     *
-     * @param string $name Name of class relatively of module's root.
-     * @return string|null Full name of class. Null class does not exist.
-     */
-    private static function createRootClassName($name)
-    {
-        $moduleClass = static::class;
-        $namespace = substr($moduleClass, 0, strrpos($moduleClass, '\\'));
-        $className = ltrim($name, "\\");
-        return "\\{$namespace}\\{$className}";
     }
 }
