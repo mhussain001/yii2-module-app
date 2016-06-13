@@ -6,20 +6,34 @@ use yii\base\Module;
 
 abstract class VersionModule extends Module
 {
+    public static function initStatic()
+    {
+        static::setEventHandlers();
+        static::setUrlRules();
+        static::setTranslations();
+    }
+
     /**
-     * @return array List of event handlers
+     * Set handlers for events.
      */
-    public static function getEventHandlers()
+    protected static function setEventHandlers()
     {
 
     }
 
     /**
-     * @return array|\yii\web\UrlRuleInterface[] List of url rules.
-     * @see \yii\web\UrlManager::addRules()
+     * Added urlRules to urlManager
      */
-    public static function getUrlRules()
+    protected static function setUrlRules()
     {
-        return [];
+
+    }
+
+    /**
+     * Added message files to map.
+     */
+    protected static function setTranslations()
+    {
+
     }
 }
