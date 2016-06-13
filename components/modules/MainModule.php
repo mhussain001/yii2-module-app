@@ -3,6 +3,7 @@
 namespace app\components\modules;
 
 use app\models\entities\Module as ModuleAr;
+use yii\base\Event;
 use yii\base\Exception;
 use yii\base\Module;
 use yii\helpers\Inflector;
@@ -36,6 +37,38 @@ abstract class MainModule extends Module
         }
         $category = "{$id}.{$version}.{$category}";
         return \Yii::t($category, $message, $params, $language);
+    }
+
+    /**
+     * @param string $name
+     * @param callable $handler
+     * @param mixed $data = null
+     * @param boolean $append = true
+     * @see \yii\base\Event::on()
+     */
+    public static function addEventListener($name, $handler, $data = null, $append = true)
+    {
+        Event::on(static::class, $name, $handler, $data, $append);
+    }
+
+    /**
+     * @param string $name
+     * @param callable $handler
+     * @see \yii\base\Event::off()
+     * */
+    public static function removeEventListener($name, $handler)
+    {
+        Event::off(static::class, $name, $handler);
+    }
+
+    /**
+     * @param string $name
+     * @param Event $event = null
+     * @see \yii\base\Event::trigger()
+     */
+    public static function triggerEvent($name, $event = null)
+    {
+        Event::trigger(static::class, $name, $event);
     }
 
     /**
