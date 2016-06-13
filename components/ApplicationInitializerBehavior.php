@@ -3,6 +3,7 @@
 namespace app\components;
 
 use app\models\entities\Module;
+use app\models\entities\ModuleVersion;
 use yii\base\Application;
 use yii\base\Behavior;
 
@@ -39,14 +40,31 @@ class ApplicationInitializerBehavior extends Behavior
             if (!$module->activeVersion) {
                 continue;
             }
-            $versionClass = $module->activeVersion->source;
-            $versionClass::initStatic();
+            $version = $module->activeVersion;
+            $this->enableModule($version);
             $moduleConfig = [
-                'class' => $module->activeVersion->source,
+                'class' => $version->source,
                 'modules' => $this->enableModules($module->children),
             ];
             $config[$module->id] = $moduleConfig;
         }
         return $config;
+    }
+
+    /**
+     * @param ModuleVersion $version
+     */
+    private function enableModule($version)
+    {
+        $this->enableModuleUrlRules($version);
+    }
+
+    /**
+     * @param ModuleVersion $version
+     */
+    private function enableModuleUrlRules($version)
+    {
+        $class = $version->source;
+        $this->owner->getUrlManager()->addRules($class::getUrlRules());
     }
 }

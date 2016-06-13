@@ -4,7 +4,6 @@ namespace app\components\modules;
 
 use app\models\entities\Module as ModuleAr;
 use yii\base\Event;
-use yii\base\Exception;
 use yii\base\Module;
 use yii\helpers\Inflector;
 
@@ -13,32 +12,6 @@ use yii\helpers\Inflector;
  */
 abstract class MainModule extends Module
 {
-    /**
-     * Translates a message to the specified language by module's dictionary.
-     *
-     * @param string $category
-     * @param string $message
-     * @param array $params = []
-     * @param string $language = null
-     * @param string $version = null
-     * @return string
-     * @throws Exception
-     * @see \Yii::t()
-     */
-    public static function t($category, $message, $params = [], $language = null, $version = null)
-    {
-        $class = static::class;
-        $id = Inflector::underscore(substr($class, strrpos($class, '\\') + 1));
-        if ($version === null) {
-            $version = ModuleAr::getActiveVersionIdByModuleId($id);
-        }
-        if ($version === null) {
-            throw new Exception("Invalid module id: {$id}");
-        }
-        $category = "{$id}.{$version}.{$category}";
-        return \Yii::t($category, $message, $params, $language);
-    }
-
     /**
      * @param string $name
      * @param callable $handler

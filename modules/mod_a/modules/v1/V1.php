@@ -9,16 +9,20 @@ use app\modules\mod_a\modules\v1\components\EventHandler;
 class V1 extends VersionModule
 {
     /** @inheritdoc */
-    protected static function setEventHandlers()
+    public static function getEventHandlers()
     {
-        ModA::addEventListener(ModA::SAMPLE_EVENT, [EventHandler::class, 'sampleEventHandler']);
+        return [
+            ModA::class=>[
+                ModA::SAMPLE_EVENT=> [EventHandler::class, 'sampleEventHandler'],
+            ],
+        ];
     }
 
     /** @inheritdoc */
-    protected static function setUrlRules()
+    public static function getUrlRules()
     {
-        \Yii::$app->getUrlManager()->addRules(
-            ['GET /mod_a_v1_message' => '/mod_a/sample/print-message']
-        );
+        return [
+            'GET /mod_a_v1_message' => '/mod_a/sample/print-message',
+        ];
     }
 }
