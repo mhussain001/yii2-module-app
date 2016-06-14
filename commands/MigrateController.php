@@ -2,17 +2,40 @@
 
 namespace app\commands;
 
+use app\components\modules\ModuleActiveRecordTrait;
+use app\models\entities\Module;
+use app\models\entities\ModuleVersion;
 use yii\console\Exception;
 use yii\helpers\Console;
 
 class MigrateController extends \yii\console\controllers\MigrateController
 {
+    /** @var  string */
+    public $moduleId;
+    /** @var  string */
+    public $versionId;
     /** @inheritdoc */
     public $templateFile = '@app/views/migration.php';
     /** @inheritdoc */
     public $migrationTable = 'migration';
     /** @inheritdoc */
     protected $namespace = 'app\migrations';
+
+    /** @inheritdoc */
+    public function options($actionId)
+    {
+        return array_merge(parent::options($actionId), ['moduleId', 'versionId']);
+    }
+
+    /** @inheritdoc */
+    public function beforeAction($action)
+    {
+        if (!parent::beforeAction($action)) {
+            return false;
+        }
+        $this->prepare();
+        return true;
+    }
 
     /** @inheritdoc */
     public function actionCreate($name)
@@ -89,6 +112,29 @@ class MigrateController extends \yii\console\controllers\MigrateController
         return new $class(['db' => $this->db]);
     }
 
+    protected function prepare()
+    {
+        if ($this->moduleId === null) {
+            return;
+        }
+
+        $module = Module::find()->byFullId($this->moduleId)->one();
+        if (!$module) {
+            throw new Exception("Invalid moduleId '{$this->moduleId}'");
+        }
+
+        $version = $this->versionId !== null
+            ? $module->getVersions()->byId($this->versionId)->one()
+            : $module->activeVersion;
+        if (!$version) {
+            throw new Exception("Invalid versionId '{$this->versionId}'");
+        }
+
+        $this->namespace = $this->getNamespace($version);
+        $this->migrationTable = $this->getMigrationTable($version);
+        $this->migrationPath = $this->getMigrationPath($version);
+    }
+
     /**
      * Returns name of file by className of migration.
      *
@@ -99,5 +145,43 @@ class MigrateController extends \yii\console\controllers\MigrateController
     {
         $alias = '@' . str_replace('\\', '/', $className);
         return \Yii::getAlias($alias) . '.php';
+    }
+
+    /**
+     * Returns migrations namespace.
+     *
+     * @param ModuleVersion $version
+     * @return string
+     */
+    protected function getNamespace($version)
+    {
+        $class = $version->source;
+        $class = trim($class, '\\');
+        $class = substr($class, 0, strrpos($class, '\\') + 1);
+        return $class . 'migrations';
+    }
+
+    /**
+     * Returns migration table.
+     *
+     * @param ModuleVersion $version
+     * @return string
+     */
+    protected function getMigrationTable($version)
+    {
+        $prefix = ModuleActiveRecordTrait::getTablePrefix($version->source);
+        return $prefix . $this->migrationTable;
+    }
+
+    /**
+     * Returns migration path.
+     *
+     * @param ModuleVersion $version
+     * @return string
+     */
+    protected function getMigrationPath($version)
+    {
+        $alias = '@' . str_replace('\\', '/', $this->getNamespace($version));
+        return \Yii::getAlias($alias);
     }
 }

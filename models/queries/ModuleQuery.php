@@ -24,4 +24,13 @@ class ModuleQuery extends ActiveQuery
     {
         return $this->andWhere(['id' => $id]);
     }
+
+    /**
+     * @param string $fullId
+     * @return $this
+     */
+    public function byFullId($fullId)
+    {
+        return $this->andWhere(['path' => $fullId]);
+    }
 }
