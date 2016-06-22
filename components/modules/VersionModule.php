@@ -8,13 +8,15 @@ abstract class VersionModule extends Module
 {
     /**
      * Return list of eventHandlers.
+     *
      * @return array [
      *   moduleClass => [
-     *     event,ame => handler
+     *     eventName => handler
      *   ]
      * ]
      */
-    protected static function getEventHandlers(){
+    protected static function getEventHandlers()
+    {
         return [];
     }
 

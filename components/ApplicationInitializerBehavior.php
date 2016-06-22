@@ -6,6 +6,7 @@ use app\models\entities\Module;
 use app\models\entities\ModuleVersion;
 use yii\base\Application;
 use yii\base\Behavior;
+use yii\base\Event;
 
 /**
  * This behavior statically initialize all active modules before application started.
@@ -57,6 +58,7 @@ class ApplicationInitializerBehavior extends Behavior
     private function enableModule($version)
     {
         $this->enableModuleUrlRules($version);
+        $this->enableModuleEventHandlers($version);
     }
 
     /**
@@ -66,5 +68,18 @@ class ApplicationInitializerBehavior extends Behavior
     {
         $class = $version->source;
         $this->owner->getUrlManager()->addRules($class::getUrlRules());
+    }
+
+    /**
+     * @param ModuleVersion $version
+     */
+    private function enableModuleEventHandlers($version)
+    {
+        $class = $version->source;
+        foreach ($class::getEventHandlers() as $moduleClass => $handlers) {
+            foreach ($handlers as $event => $handler) {
+                Event::on($moduleClass, $event, $handler);
+            }
+        }
     }
 }
