@@ -8,6 +8,8 @@ class SampleController extends Controller
 {
     public function actionPrintMessage()
     {
-        return 'Sample message';
+    	$data = 'Sample message';
+    	return $data;
+
     }
 }

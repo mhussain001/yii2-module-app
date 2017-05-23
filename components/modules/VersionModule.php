@@ -15,7 +15,7 @@ abstract class VersionModule extends Module
      *   ]
      * ]
      */
-    protected static function getEventHandlers()
+    public static function getEventHandlers()
     {
         return [];
     }

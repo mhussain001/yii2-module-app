@@ -3,7 +3,7 @@
 return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
-    'language' => 'ru-RU',
+    'language' => 'en-US',
     'sourceLanguage' => 'en-US',
     'components' => [
         'i18n' => [
@@ -15,6 +15,15 @@ return [
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
+         'urlManager' => [
+           'enablePrettyUrl' => true,
+            'showScriptName' => false,
+        ],
+        'request' => [
+            'enableCookieValidation' => true,
+            'enableCsrfValidation' => true,
+            'cookieValidationKey' => 'xdr5^TFC',
+        ],
     ],
     'as initializer' => [
         'class' => \app\components\ApplicationInitializerBehavior::class,
