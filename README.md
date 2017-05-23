@@ -6,4 +6,4 @@
 * run migration scripts 'yii  migrate'
 
 # URLs
-* http://localhost/yii2-module-app/mod_a/sample/print-message
+* http://localhost/yii2-module-app/web/mod_a/sample/print-message
