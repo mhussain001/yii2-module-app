@@ -9,7 +9,8 @@ class SampleController extends Controller
     public function actionPrintMessage()
     {
     	$data = 'Sample message';
-    	return $data;
-
+    	return $this->render('sample', [
+            'data' => $data,
+        ]);
     }
 }
